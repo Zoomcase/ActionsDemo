@@ -8,6 +8,7 @@ on:
       - synchronize
       - reopened
       - closed
+      - labeled
     paths:
       - "Memos/**"
       - ".github/workflows/memos.yml"

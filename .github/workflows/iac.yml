@@ -6,11 +6,11 @@ on:
       - "IAC/**"
       - ".github/workflows/iac.yml"
     types:
-      - "opened"
-      - "synchronize"
-      - "reopened"
-      - "closed"
-      - "labeled"
+      - opened
+      - synchronize
+      - reopened
+      - closed
+      - labeled
 
 jobs:
   terraform:
