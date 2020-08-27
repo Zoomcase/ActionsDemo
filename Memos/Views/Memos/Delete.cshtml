@@ -1,0 +1,15 @@
+﻿@model Memos.Models.Memo
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h5>Are you sure you want to delete?</h5>
+<br />
+<div>    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <a asp-action="Index" class="btn btn-success">Nope</a> |
+        <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
+    </form>
+</div>
