@@ -15,12 +15,6 @@ on:
     branches:
       - "develop"
       - "master"
-  push:
-    paths:
-      - "Memos/**"
-      - ".github/workflows/memos.yml"
-    branches:
-      - "feature/**"
 
 env:
   DOTNET_VERSION: "3.1.x"
