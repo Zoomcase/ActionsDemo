@@ -73,10 +73,25 @@ jobs:
           path: Memos
 
       - name: Deploy Dev
-        if: contains(github.base_ref, 'feature') || github.base_ref == 'develop'
+        if: github.base_ref == 'develop'
         env:
           RESOURCE_GROUP_NAME: DevMemos
           APP_SERVICE_NAME: devmemos
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.11.0
+          inlineScript: |
+            az login --service-principal -u ${{ secrets.ARM_CLIENT_ID }} -p ${{ secrets.ARM_CLIENT_SECRET }} --tenant ${{ secrets.ARM_TENANT_ID }}
+            az account set --subscription ${{ secrets.ARM_SUBSCRIPTION_ID }}
+            cd Memos
+            zip -r ../memos.zip ./*
+            az webapp deployment source config-zip --name ${{ env.APP_SERVICE_NAME }} --resource-group ${{ env.RESOURCE_GROUP_NAME }} --src ../memos.zip
+
+      - name: Deploy Prod
+        if: github.base_ref == 'master'
+        env:
+          RESOURCE_GROUP_NAME: ProdMemos
+          APP_SERVICE_NAME: prodmemos
         uses: azure/CLI@v1
         with:
           azcliversion: 2.11.0
