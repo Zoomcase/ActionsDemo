@@ -33,7 +33,7 @@ resource "azurerm_app_service" "this" {
   }
 
   app_settings = {
-    "ConnectionStrings__MainDatabase" = "Server=tcp:devmemos-sqlsvr.database.windows.net,1433;Initial Catalog=${lower(var.product)};Persist Security Info=False;User ID=${var.sqlsvr_admin_name};Password=${var.sqlsvr_admin_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    "ConnectionStrings__MainDatabase" = "Server=tcp:${lower(local.base_name)}-sqlsvr.database.windows.net,1433;Database=${lower(var.product)};"
     "AppSettings__Environment" = "${var.env}"
   }
 
